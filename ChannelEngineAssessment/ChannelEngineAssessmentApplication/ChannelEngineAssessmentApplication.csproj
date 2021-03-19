@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChannelEngineAssessmentDomain\ChannelEngineAssessmentDomain.csproj" />
+    <ProjectReference Include="..\ChannelEngineAssessmentInfrastructure\ChannelEngineAssessmentInfrastructure.csproj" />
+    <ProjectReference Include="..\ChannelEngineAssessmentShared\ChannelEngineAssessmentShared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Products\Handlers\" />
+  </ItemGroup>
+
+</Project>

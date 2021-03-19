@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelEngineAssessmentWeb", "ChannelEngineAssessmentWeb\ChannelEngineAssessmentWeb.csproj", "{14302F02-D38D-4F69-B165-449EFDA0D9FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelEngineAssessmentConsole", "ChannelEngineAssessmentConsole\ChannelEngineAssessmentConsole.csproj", "{570C6BC2-4CB5-4947-BBAB-36F4E6F37011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelEngineAssessmentApplication", "ChannelEngineAssessmentApplication\ChannelEngineAssessmentApplication.csproj", "{C8FBB60F-BEC0-471C-B2F8-E5864B2373AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelEngineAssessmentDomain", "ChannelEngineAssessmentDomain\ChannelEngineAssessmentDomain.csproj", "{0682B39D-A082-4823-99FB-077523464470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelEngineAssessmentInfrastructure", "ChannelEngineAssessmentInfrastructure\ChannelEngineAssessmentInfrastructure.csproj", "{E21337D1-7005-49FC-A96D-451BB36670B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelEngineAssessmentShared", "ChannelEngineAssessmentShared\ChannelEngineAssessmentShared.csproj", "{E1A006E2-CE8D-4CDD-96CF-D713ADCDA561}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14302F02-D38D-4F69-B165-449EFDA0D9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14302F02-D38D-4F69-B165-449EFDA0D9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14302F02-D38D-4F69-B165-449EFDA0D9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14302F02-D38D-4F69-B165-449EFDA0D9FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{570C6BC2-4CB5-4947-BBAB-36F4E6F37011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570C6BC2-4CB5-4947-BBAB-36F4E6F37011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570C6BC2-4CB5-4947-BBAB-36F4E6F37011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570C6BC2-4CB5-4947-BBAB-36F4E6F37011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8FBB60F-BEC0-471C-B2F8-E5864B2373AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8FBB60F-BEC0-471C-B2F8-E5864B2373AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8FBB60F-BEC0-471C-B2F8-E5864B2373AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8FBB60F-BEC0-471C-B2F8-E5864B2373AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0682B39D-A082-4823-99FB-077523464470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0682B39D-A082-4823-99FB-077523464470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0682B39D-A082-4823-99FB-077523464470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0682B39D-A082-4823-99FB-077523464470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E21337D1-7005-49FC-A96D-451BB36670B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E21337D1-7005-49FC-A96D-451BB36670B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E21337D1-7005-49FC-A96D-451BB36670B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E21337D1-7005-49FC-A96D-451BB36670B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1A006E2-CE8D-4CDD-96CF-D713ADCDA561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1A006E2-CE8D-4CDD-96CF-D713ADCDA561}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1A006E2-CE8D-4CDD-96CF-D713ADCDA561}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1A006E2-CE8D-4CDD-96CF-D713ADCDA561}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6AD60D53-65EE-40D5-B510-41A22E564B32}
+	EndGlobalSection
+EndGlobal

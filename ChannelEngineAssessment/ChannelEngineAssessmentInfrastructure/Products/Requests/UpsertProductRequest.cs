@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ChannelEngineAssessmentInfrastructure.Products.DTOs;
 
 namespace ChannelEngineAssessmentInfrastructure.Products.Requests
 {
     public class UpsertProductRequest
     {
         public string MerchantProductNo { get; }
-        public List<ProductExtraDataRequest> ExtraData { get; }
+        public List<ProductExtraDataDto> ExtraData { get; }
         public string Name { get; }
         public string Description { get; }
         public string Brand { get; }
@@ -39,7 +40,7 @@ namespace ChannelEngineAssessmentInfrastructure.Products.Requests
             string name, string description, string brand, string size, string color, string ean, string manufacturerProductNumber,
             int stock, decimal price, decimal msrp, decimal purchasePrice, string vatRateType, decimal shippingCost, string shippingTime,
             string url, string imageUrl, string extraImageUrl1, string extraImageUrl2, string extraImageUrl3, string extraImageUrl4, string extraImageUrl5,
-            string extraImageUrl6, string extraImageUrl7, string extraImageUrl8, string extraImageUrl9, string categoryTrail, List<ProductExtraDataRequest> extraData)
+            string extraImageUrl6, string extraImageUrl7, string extraImageUrl8, string extraImageUrl9, string categoryTrail, List<ProductExtraDataDto> extraData)
         {
             MerchantProductNo = merchantProductNo;
             ExtraData = extraData;

@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-5">
+        <div class="project-info-box mt-0">
+            <h5>{{product.name}}</h5>
+            <div [innerHTML]="product.description"></div>
+        </div><!-- / project-info-box -->
+
+        <div class="project-info-box">
+            <p><b>Brand:</b> {{product.brand}}</p>
+            <p><b>Size:</b> {{product.size}}</p>
+            <p><b>Color:</b> {{product.color}}</p>
+            <p><b>Price:</b> {{product.price}}</p>
+            <p><b>EAN:</b> {{product.ean}}</p>
+            <p><b>Manufacturer product number:</b> {{product.manufacturerProductNumber}}</p>
+            <p><b>Stock:</b> {{product.stock}}</p>
+            <p><b>MSRP:</b> {{product.msrp}}</p>
+            <p><b>Purchase price:</b> {{product.purchasePrice}}</p>
+            <p><b>VAT rate type:</b> {{product.vatRateType}}</p>
+            <p><b>Shipping cost:</b> {{product.shippingCost}}</p>
+            <p><b>Shipping time:</b> {{product.shippingTime}}</p>
+            <p><b>Website:</b> <a [href]="product.url"> Website</a></p>
+        </div><!-- / project-info-box -->
+
+    </div><!-- / column -->
+
+    <div class="col-md-7">
+        <img [src]="product.imageUrl" alt="project-image" class="rounded">
+        <div class="project-info-box">
+            <p><b>Categories:</b> {{product.categoryTrail}}</p>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <button class="btn btn-primary">Update</button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <button class="btn btn-success">Set stock</button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <button class="btn btn-danger">Remove</button>
+                </div>
+
+            </div>
+        </div><!-- / project-info-box -->
+    </div><!-- / column -->
+</div>

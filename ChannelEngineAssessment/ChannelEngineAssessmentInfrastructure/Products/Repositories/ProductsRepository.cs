@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ChannelEngineAssessmentDomain.Products;
 using ChannelEngineAssessmentInfrastructure.Products.DTOs;
+using ChannelEngineAssessmentInfrastructure.Products.DTOs.Responses;
 using ChannelEngineAssessmentInfrastructure.Products.Requests;
 using ChannelEngineAssessmentShared.Configurations;
 using ChannelEngineAssessmentShared.Domain;
@@ -43,7 +45,7 @@ namespace ChannelEngineAssessmentInfrastructure.Products.Repositories
             var restRequest = new RestRequest(_applicationConfiguration.Endpoints.GetProductEndpoint);
             restRequest.AddParameter(nameof(id), id, ParameterType.UrlSegment);
 
-            var result = await _genericRestRepository.GetAsync<SingleResponseDto<ProductDto>>(restRequest);
+            var result = await _genericRestRepository.GetAsync<SingleResponseDto<ProductResponseDto>>(restRequest);
             return _mapper.Map<Product>(result.Content);
         }
 
@@ -51,7 +53,7 @@ namespace ChannelEngineAssessmentInfrastructure.Products.Repositories
         {
             var restRequest = new RestRequest(_applicationConfiguration.Endpoints.GetProductsEndpoint);
 
-            var result = await _genericRestRepository.GetAsync<ListResponseDto<ProductDto>>(restRequest);
+            var result = await _genericRestRepository.GetAsync<ListResponseDto<ProductResponseDto>>(restRequest);
             return _mapper.Map<IEnumerable<Product>>(result.Content);
         }
 
@@ -61,6 +63,26 @@ namespace ChannelEngineAssessmentInfrastructure.Products.Repositories
             restRequest.AddParameter(nameof(id), id, ParameterType.UrlSegment);
 
             await _genericRestRepository.DeleteAsync<object>(restRequest);
+        }
+
+        public async Task<IEnumerable<Product>> BrowseAsync(IEnumerable<string> merchantProductNoList = null)
+        {
+            var restRequest = new RestRequest(_applicationConfiguration.Endpoints.GetProductsEndpoint);
+            ApplyWhereStatement(restRequest, merchantProductNoList);
+
+            var result = await _genericRestRepository.GetAsync<ListResponseDto<ProductResponseDto>>(restRequest);
+            return _mapper.Map<IEnumerable<Product>>(result.Content);
+        }
+
+        private void ApplyWhereStatement(RestRequest restRequest, IEnumerable<string> merchantProductNoList)
+        {
+            if (merchantProductNoList != null && merchantProductNoList.Any())
+            {
+                foreach (var no in merchantProductNoList)
+                {
+                    restRequest.AddParameter(nameof(merchantProductNoList), no, ParameterType.QueryString);
+                }
+            }
         }
     }
 }

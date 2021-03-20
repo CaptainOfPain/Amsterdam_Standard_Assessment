@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using ChannelEngineAssessmentDomain.Products;
+using ChannelEngineAssessmentShared.Infrastructure.Abstractions;
 
 namespace ChannelEngineAssessmentInfrastructure.Products.DTOs
 {
-    public class ProductDto
+    public class ProductDto : IDto
     {
         public string MerchantProductNo { get; set; }
         public bool IsActive { get; set; }
-        public List<ProductExtraDataDto> ExtraData { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Brand { get; set; }
@@ -24,15 +24,8 @@ namespace ChannelEngineAssessmentInfrastructure.Products.DTOs
         public string ShippingTime { get; set; }
         public string Url { get; set; }
         public string ImageUrl { get; set; }
-        public string ExtraImageUrl1 { get; set; }
-        public string ExtraImageUrl2 { get; set; }
-        public string ExtraImageUrl3 { get; set; }
-        public string ExtraImageUrl4 { get; set; }
-        public string ExtraImageUrl5 { get; set; }
-        public string ExtraImageUrl6 { get; set; }
-        public string ExtraImageUrl7 { get; set; }
-        public string ExtraImageUrl8 { get; set; }
-        public string ExtraImageUrl9 { get; set; }
         public string CategoryTrail { get; set; }
+        public IEnumerable<ProductExtraDataDto> ExtraData { get; set; }
+        public IEnumerable<ExtraImageUrlDto> ExtraImageUrls { get; set; }
     }
 }

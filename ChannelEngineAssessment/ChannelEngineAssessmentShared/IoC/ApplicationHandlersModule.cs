@@ -2,6 +2,7 @@
 using ChannelEngineAssessmentShared.Application.Handlers.Abstraction;
 using ChannelEngineAssessmentShared.Application.Handlers.Implementations;
 using ChannelEngineAssessmentShared.Application.Services;
+using ChannelEngineAssessmentShared.Infrastructure.Abstractions;
 using Module = Autofac.Module;
 
 namespace ChannelEngineAssessmentShared.IoC 
@@ -19,6 +20,11 @@ namespace ChannelEngineAssessmentShared.IoC
                 .InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(serviceAssembly)
+                .Where(x => x.IsAssignableTo<IReadModel>())
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(serviceAssembly)
                 .AsClosedTypesOf(typeof(ICommandHandler<>))
                 .InstancePerLifetimeScope();
 
@@ -29,7 +35,7 @@ namespace ChannelEngineAssessmentShared.IoC
             builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>().InstancePerLifetimeScope();
             builder.RegisterType<QueryDispatcher>().As<IQueryDispatcher>().InstancePerLifetimeScope();
 
-            builder.RegisterType<CommandQueryHandlerDecorator>().As<ICommandQueryHandlerDecorator>().InstancePerLifetimeScope();
+            builder.RegisterType<CommandQueryDispatcherDecorator>().As<ICommandQueryDispatcherDecorator>().InstancePerLifetimeScope();
         }
     }
 }

@@ -5,6 +5,11 @@ namespace ChannelEngineAssessmentDomain.Products.Factories
     public class ProductDomainFactory : IProductDomainFactory
     {
         public Product Create(ProductDataStructure dataStructure)
-            => new Product(dataStructure.MerchantProductNo, dataStructure);
+        { 
+            var product = new Product(dataStructure.MerchantProductNo, dataStructure);
+            product.AddExtraImageUrls(dataStructure.ExtraImageUrls);
+
+            return product;
+        } 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ChannelEngineAssessmentDomain.Products.DataStructures;
 using ChannelEngineAssessmentDomain.Products.Resources;
 using ChannelEngineAssessmentShared.Domain;
@@ -27,15 +28,15 @@ namespace ChannelEngineAssessmentDomain.Products
         public string ShippingTime { get; private set; }
         public string Url { get; private set; }
         public string ImageUrl { get; private set; }
-        public string ExtraImageUrl1 { get; private set; }
-        public string ExtraImageUrl2 { get; private set; }
-        public string ExtraImageUrl3 { get; private set; }
-        public string ExtraImageUrl4 { get; private set; }
-        public string ExtraImageUrl5 { get; private set; }
-        public string ExtraImageUrl6 { get; private set; }
-        public string ExtraImageUrl7 { get; private set; }
-        public string ExtraImageUrl8 { get; private set; }
-        public string ExtraImageUrl9 { get; private set; }
+
+
+        private  List<ExtraImageUrl> _extraImageUrls = new List<ExtraImageUrl>();
+        public IEnumerable<ExtraImageUrl> ExtraImageUrls
+        {
+            get => _extraImageUrls;
+            private set => _extraImageUrls = value.ToList();
+        }
+
         public string CategoryTrail { get; private set; }
 
         internal Product(AggregateId id, ProductDataStructure dataStructure) : base(id)
@@ -64,6 +65,39 @@ namespace ChannelEngineAssessmentDomain.Products
             Stock = stock;
         }
 
+        public int AddExtraImageUrl(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                throw new BusinessLogicException(ProductResources.WrongImageUrlMessage);
+            }
+
+            var extraImageUrl = new ExtraImageUrl(GetNextExtraImageUrlNo, url);
+            _extraImageUrls.Add(new ExtraImageUrl(GetNextExtraImageUrlNo, url));
+
+            return extraImageUrl.No;
+        }
+
+        public void AddExtraImageUrls(IEnumerable<string> urls)
+        {
+            foreach (var url in urls)
+            {
+                AddExtraImageUrl(url);
+            }
+        }
+
+        public void RemoveExtraImageUrl(int no)
+        {
+            var extraImageUrl = GetExtraImageUrlOrThrow(no);
+            _extraImageUrls.Remove(extraImageUrl);
+        }
+
+        public void UpdateExternalImageUrl(int no, string url)
+        {
+            var extraImageUrl = GetExtraImageUrlOrThrow(no);
+            extraImageUrl.Update(url);
+        }
+
         private void AssignFromDataStructure(ProductDataStructure dataStructure)
         {
             IsActive = dataStructure.IsActive;
@@ -83,16 +117,21 @@ namespace ChannelEngineAssessmentDomain.Products
             ShippingTime = dataStructure.ShippingTime;
             Url = dataStructure.Url;
             ImageUrl = dataStructure.ImageUrl;
-            ExtraImageUrl1 = dataStructure.ExtraImageUrl1;
-            ExtraImageUrl2 = dataStructure.ExtraImageUrl2;
-            ExtraImageUrl3 = dataStructure.ExtraImageUrl3;
-            ExtraImageUrl4 = dataStructure.ExtraImageUrl4;
-            ExtraImageUrl5 = dataStructure.ExtraImageUrl5;
-            ExtraImageUrl6 = dataStructure.ExtraImageUrl6;
-            ExtraImageUrl7 = dataStructure.ExtraImageUrl7;
-            ExtraImageUrl8 = dataStructure.ExtraImageUrl8;
-            ExtraImageUrl9 = dataStructure.ExtraImageUrl9;
             CategoryTrail = dataStructure.CategoryTrail;
+        }
+
+        private int GetNextExtraImageUrlNo
+            => _extraImageUrls.Any() ? _extraImageUrls.Max(x => x.No) + 1 : 1;
+
+        private ExtraImageUrl GetExtraImageUrlOrThrow(int no)
+        {
+            var extraImageUrl = _extraImageUrls.SingleOrDefault(x => x.No == no);
+            if (extraImageUrl == null)
+            {
+                throw new BusinessLogicException(ProductResources.ExternalImageUrlNotFoundMessage);
+            }
+
+            return extraImageUrl;
         }
     }
 }

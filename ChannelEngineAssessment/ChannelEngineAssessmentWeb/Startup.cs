@@ -6,6 +6,7 @@ using ChannelEngineAssessmentDomain.MerchantOrders.Factories;
 using ChannelEngineAssessmentInfrastructure.MerchantOrders.Repositories;
 using ChannelEngineAssessmentShared.Configurations;
 using ChannelEngineAssessmentShared.IoC;
+using ChannelEngineAssessmentWeb.MappingProfiles.Products;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -49,7 +50,7 @@ namespace ChannelEngineAssessmentWeb
                     Configuration["AppConfiguration:ApiKeyNameUrlParameter"],
                     Configuration["AppConfiguration:ApiKey"],
                     endpoints: endpointsConfiguration)));
-            builder.RegisterModule(new ApplicationMappingsModule(typeof(MerchantOrder).Assembly, typeof(MerchantOrderRepository).Assembly));
+            builder.RegisterModule(new ApplicationMappingsModule(typeof(ProductsService).Assembly, typeof(MerchantOrderRepository).Assembly, typeof(ProductsControllerMappingProfile).Assembly));
             builder.RegisterModule(new ApplicationHandlersModule<ProductsService>());
             builder.RegisterModule(new ApplicationRepositoriesModule<MerchantOrderRepository>());
             builder.RegisterModule(new ApplicationFactoriesModule<MerchantOrderDomainFactory>());

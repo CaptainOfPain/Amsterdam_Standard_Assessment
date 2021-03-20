@@ -5,12 +5,12 @@ using ChannelEngineAssessmentShared.Infrastructure.Abstractions;
 
 namespace ChannelEngineAssessmentShared.Application.Handlers.Implementations
 {
-    public class CommandQueryHandlerDecorator : ICommandQueryHandlerDecorator
+    public class CommandQueryDispatcherDecorator : ICommandQueryDispatcherDecorator
     {
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQueryDispatcher _queryDispatcher;
 
-        public CommandQueryHandlerDecorator(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
+        public CommandQueryDispatcherDecorator(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
         {
             _commandDispatcher = commandDispatcher ?? throw new ArgumentNullException(nameof(commandDispatcher));
             _queryDispatcher = queryDispatcher ?? throw new ArgumentNullException(nameof(queryDispatcher));

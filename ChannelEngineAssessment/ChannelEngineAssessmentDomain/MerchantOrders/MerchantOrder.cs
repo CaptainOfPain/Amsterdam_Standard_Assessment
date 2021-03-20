@@ -38,7 +38,7 @@ namespace ChannelEngineAssessmentDomain.MerchantOrders
         public IEnumerable<MerchantOrderLine> Lines
         {
             get => _lines;
-            set => _lines = value.ToList();
+            private set => _lines = value.ToList();
         }
 
 

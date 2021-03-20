@@ -10,8 +10,4 @@
     <ProjectReference Include="..\ChannelEngineAssessmentShared\ChannelEngineAssessmentShared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Products\Handlers\" />
-  </ItemGroup>
-
 </Project>

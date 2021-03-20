@@ -1,0 +1,26 @@
+<div class="project-info-box">
+    <h1 id="tableLabel">Top sold products</h1>
+
+    <p *ngIf="!topSoldProducts"><em>Loading...</em></p>
+
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="topSoldProducts">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Name</th>
+          <th>EAN</th>
+          <th>Total quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of topSoldProducts">
+          <td>{{ product.merchantProductNo }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.ean }}</td>
+          <td>{{ product.totalQuantity }}</td>
+          <td><button class="btn btn-primary" (click)="openProductDetails(product.merchantProductNo)">Details</button></td>
+        </tr>
+      </tbody>
+    </table>
+</div>

@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\fetch-data\serivces\" />
+    <Folder Include="ClientApp\src\app\products\" />
+    <Folder Include="ClientApp\src\app\products\" />
     <Folder Include="IoC\Modules\" />
   </ItemGroup>
 

@@ -1,3 +1,4 @@
+<button disabled (click)="isNewProductViewVisible = !isNewProductViewVisible" class="btn btn-success">Add new product</button>
 <div class="project-info-box">
     <h1 id="tableLabel">Top sold products</h1>
 
@@ -24,3 +25,5 @@
       </tbody>
     </table>
 </div>
+
+<app-save-product-modal (onProductCreated)="createProduct($event)" *ngIf="isNewProductViewVisible" [isEditMode]="false"></app-save-product-modal>

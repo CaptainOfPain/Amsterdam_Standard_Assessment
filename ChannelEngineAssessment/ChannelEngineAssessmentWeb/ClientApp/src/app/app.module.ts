@@ -11,6 +11,8 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { SetProductStockModalComponent } from './products/set-product-stock-modal/set-product-stock-modal.component';
+import { SaveProductModalComponent } from './products/save-product-modal/save-product-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
     CounterComponent,
     FetchDataComponent,
     ProductsComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    SetProductStockModalComponent,
+    SaveProductModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

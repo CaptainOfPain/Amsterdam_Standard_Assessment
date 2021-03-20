@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using ChannelEngineAssessmentDomain.Products;
-using ChannelEngineAssessmentInfrastructure.Products.DTOs;
 using ChannelEngineAssessmentInfrastructure.Products.DTOs.Responses;
 using ChannelEngineAssessmentInfrastructure.Products.Requests;
 using ChannelEngineAssessmentShared.Configurations;
 using ChannelEngineAssessmentShared.Domain;
+using ChannelEngineAssessmentShared.Exceptions;
 using ChannelEngineAssessmentShared.Infrastructure.Repositories.Abstractions;
 using RestSharp;
 
@@ -30,7 +31,7 @@ namespace ChannelEngineAssessmentInfrastructure.Products.Repositories
         public async Task CreateAsync(Product aggregate)
         {
             var restRequest = new RestRequest(_applicationConfiguration.Endpoints.SetProductEndpoint);
-            restRequest.AddJsonBody(_mapper.Map<UpsertProductRequest>(aggregate));
+            restRequest.AddJsonBody(new List<UpsertProductRequest>() {_mapper.Map<UpsertProductRequest>(aggregate)});
 
             await _genericRestRepository.PostAsync<object>(restRequest);
         }
@@ -45,8 +46,20 @@ namespace ChannelEngineAssessmentInfrastructure.Products.Repositories
             var restRequest = new RestRequest(_applicationConfiguration.Endpoints.GetProductEndpoint);
             restRequest.AddParameter(nameof(id), id, ParameterType.UrlSegment);
 
-            var result = await _genericRestRepository.GetAsync<SingleResponseDto<ProductResponseDto>>(restRequest);
-            return _mapper.Map<Product>(result.Content);
+            try
+            {
+                var result = await _genericRestRepository.GetAsync<SingleResponseDto<ProductResponseDto>>(restRequest);
+                return _mapper.Map<Product>(result.Content);
+            }
+            catch (Exception e)
+            {
+                if (e is HttpClientUnhandledException ex &&ex.StatusCode.Equals(HttpStatusCode.NotFound))
+                {
+                    return null;
+                }
+
+                throw;
+            }
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync()

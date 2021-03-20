@@ -15,7 +15,8 @@ namespace ChannelEngineAssessmentInfrastructure.Products
         public ProductsMappingProfile()
         {
             CreateMap<Product, UpsertProductRequest>()
-                .ConstructUsing(aggregate => new UpsertProductRequest(
+                .ConstructUsing(aggregate => 
+                    new UpsertProductRequest(
                     aggregate.Id.Id,
                     aggregate.Name,
                     aggregate.Description,
@@ -74,6 +75,10 @@ namespace ChannelEngineAssessmentInfrastructure.Products
                 .ForMember(x => x.Type, opt => opt.MapFrom(x => x.Type));
 
             CreateMap<ExtraImageUrl, ExtraImageUrlDto>();
+
+            CreateMap<ProductExtraData, ProductExtraDataRequest>()
+                .ConstructUsing(x =>
+                    new ProductExtraDataRequest(x.Key, x.Value, x.Type.GetEnumMemberValue(), x.IsPublic));
         }
     }
 }

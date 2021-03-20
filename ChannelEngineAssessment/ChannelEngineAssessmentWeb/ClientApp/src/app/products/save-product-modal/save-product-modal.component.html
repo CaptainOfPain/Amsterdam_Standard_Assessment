@@ -1,0 +1,83 @@
+<div class="modal-box">
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="project-info-box col-md-4">
+            <div *ngIf="!isEditMode" class="form-group">
+                <label for="exampleInputEmail1">Merchant product no:</label>
+                <input [(ngModel)]="product.merchantProductNo" type="text" class="form-control" placeholder="Merchant product no">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name:</label>
+                <input [(ngModel)]="product.name" type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Brand:</label>
+                <input [(ngModel)]="product.brand" type="text" class="form-control" placeholder="Brand">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Description:</label>
+                <textarea [(ngModel)]="product.description" type="text" class="form-control" placeholder="Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Size:</label>
+                <input [(ngModel)]="product.size" type="text" class="form-control" placeholder="Size">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Color:</label>
+                <input [(ngModel)]="product.color" type="text" class="form-control" placeholder="Color">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">EAN:</label>
+                <input [(ngModel)]="product.ean" type="text" class="form-control" placeholder="EAN">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">MSRP:</label>
+                <input [(ngModel)]="product.msrp" type="number" class="form-control" placeholder="MSRP">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Shipping cost:</label>
+                <input [(ngModel)]="product.shippingCost" type="number" class="form-control" placeholder="ShippingCost">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Purchase price:</label>
+                <input [(ngModel)]="product.purchasePrice" type="number" class="form-control" placeholder="Purchase price">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Price:</label>
+                <input [(ngModel)]="product.price" type="number" class="form-control" placeholder="Price">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Shipping time</label>
+                <input [(ngModel)]="product.shippingTime" type="text" class="form-control" placeholder="Shipping time">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Url</label>
+                <input [(ngModel)]="product.url" type="text" class="form-control" placeholder="Url">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Image url</label>
+                <input [(ngModel)]="product.imageUrl" type="text" class="form-control" placeholder="Image url">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Category trail</label>
+                <input [(ngModel)]="product.categoryTrail" type="text" class="form-control" placeholder="Category trail">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Vat rate type:</label>
+                <select [(ngModel)]="product.vatRateType">
+                    <option *ngFor="let enumValue of vatRateTypeEnumValues()" [value]="vatRateTypeEnum[enumValue]">
+                        {{enumValue}}
+                    </option>
+                </select>
+            </div>
+            
+            <button *ngIf="!isEditMode" (click)="create()" class="btn btn-success">Create</button>
+            <button *ngIf="isEditMode" (click)="update()" class="btn btn-success">Update</button>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+</div>

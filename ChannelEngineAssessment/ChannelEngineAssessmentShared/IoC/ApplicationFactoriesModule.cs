@@ -12,7 +12,7 @@ namespace ChannelEngineAssessmentShared.IoC
             var domainAssembly = typeof(TFactory).Assembly;
 
             builder.RegisterType<HttpClientFactory>().As<IHttpClientFactory>().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(domainAssembly).Where(x => x.IsAssignableTo<IDomainFactory>());
+            builder.RegisterAssemblyTypes(domainAssembly).Where(x => x.IsAssignableTo<IDomainFactory>()).AsImplementedInterfaces().InstancePerLifetimeScope();
         }
     }
 }

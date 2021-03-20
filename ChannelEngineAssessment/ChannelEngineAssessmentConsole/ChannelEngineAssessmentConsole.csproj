@@ -5,4 +5,26 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Terminal.Gui" Version="0.90.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChannelEngineAssessmentApplication\ChannelEngineAssessmentApplication.csproj" />
+    <ProjectReference Include="..\ChannelEngineAssessmentDomain\ChannelEngineAssessmentDomain.csproj" />
+    <ProjectReference Include="..\ChannelEngineAssessmentInfrastructure\ChannelEngineAssessmentInfrastructure.csproj" />
+    <ProjectReference Include="..\ChannelEngineAssessmentShared\ChannelEngineAssessmentShared.csproj" />
+    <ProjectReference Include="..\ChannelEngineAssessmentWeb\ChannelEngineAssessmentWeb.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\ChannelEngineAssessmentWeb\appsettings.json" Link="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

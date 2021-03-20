@@ -39,7 +39,6 @@ namespace ChannelEngineAssessmentWeb
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var appConfiguration = new ApplicationConfiguration();
             var endpointsConfiguration = new ApiEndpointsConfiguration();
             Configuration.GetSection("AppConfiguration:Endpoints").Bind(endpointsConfiguration);
             builder.RegisterModule(new ApplicationConfigurationModule(

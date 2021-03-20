@@ -52,7 +52,7 @@ namespace ChannelEngineAssessmentShared.Infrastructure.Repositories.Implementati
                 throw new ApiAuthenticationError(responseMessage.ErrorMessage);
             }
 
-            throw new HttpClientUnhandledException(responseMessage.ErrorMessage);
+            throw new HttpClientUnhandledException(responseMessage.ErrorMessage, responseMessage.StatusCode);
         }
     }
 }

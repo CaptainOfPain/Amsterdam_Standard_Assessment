@@ -14,7 +14,7 @@ export class ProductModel {
     public manufacturerProductNumber: string;
     public stock: number;
     public price: number;
-    public mSRP: number;
+    public msrp: number;
     public purchasePrice: number;
     public vatRateType: VatRateTypeEnum;
     public shippingCost: number;

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { TopSoldProductModel } from '../models/top-sold-product.model';
 import { ListResultModel } from '../models/list-result.model';
 import { ProductModel } from '../models/product.model';
+import { SaveProductRequestModel } from '../models/save-product-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,17 @@ export class ProductsService {
 
   public getProduct(merchantProductNo: string): Observable<ProductModel> {
     return this._http.get<ProductModel>(this._baseUrl + 'products/' + merchantProductNo);
+  }
+
+  public setNewStock(merchantProductNo: string, newStock: number): Observable<void> {
+    return this._http.patch<void>(this._baseUrl + 'products/', {merchantProductNo, newStock});
+  }
+
+  public createProduct(request: SaveProductRequestModel): Observable<void> {
+    return this._http.post<void>(this._baseUrl + 'products/', request);
+  }
+
+  public updateProduct(request: SaveProductRequestModel): Observable<void> {
+    return this._http.put<void>(this._baseUrl + 'products/', request);
   }
 }

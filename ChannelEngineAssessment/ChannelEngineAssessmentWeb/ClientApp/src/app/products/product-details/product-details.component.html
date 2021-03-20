@@ -15,7 +15,7 @@
             <p><b>Stock:</b> {{product.stock}}</p>
             <p><b>MSRP:</b> {{product.msrp}}</p>
             <p><b>Purchase price:</b> {{product.purchasePrice}}</p>
-            <p><b>VAT rate type:</b> {{product.vatRateType}}</p>
+            <p><b>VAT rate type:</b> {{vatRateTypeEnum[product.vatRateType]}}</p>
             <p><b>Shipping cost:</b> {{product.shippingCost}}</p>
             <p><b>Shipping time:</b> {{product.shippingTime}}</p>
             <p><b>Website:</b> <a [href]="product.url"> Website</a></p>
@@ -29,16 +29,18 @@
             <p><b>Categories:</b> {{product.categoryTrail}}</p>
             <div class="row">
                 <div class="col-md-4 text-center">
-                    <button class="btn btn-primary">Update</button>
+                    <button (click)="isUpdateModalVisible = !isUpdateModalVisible" class="btn btn-primary">Update</button>
                 </div>
                 <div class="col-md-4 text-center">
-                    <button class="btn btn-success">Set stock</button>
+                    <button (click)="isSetStockModalVisible = !isSetStockModalVisible" class="btn btn-success">Set stock</button>
                 </div>
                 <div class="col-md-4 text-center">
-                    <button class="btn btn-danger">Remove</button>
+                    <button disabled class="btn btn-danger">Remove</button>
                 </div>
-
             </div>
         </div><!-- / project-info-box -->
     </div><!-- / column -->
 </div>
+
+<app-set-product-stock-modal *ngIf="isSetStockModalVisible" (onNewStockSetted)="setNewStock($event)"></app-set-product-stock-modal>
+<app-save-product-modal *ngIf="isUpdateModalVisible" (onProductUpdated)="updateProduct($event)" [product]="product" [isEditMode]="true"></app-save-product-modal>

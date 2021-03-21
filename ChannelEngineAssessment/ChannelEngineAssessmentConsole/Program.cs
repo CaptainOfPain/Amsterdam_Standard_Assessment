@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autofac;
-using AutoMapper.Configuration;
+using Autofac.Extras.DynamicProxy;
 using ChannelEngineAssessmentApplication.Products;
+using ChannelEngineAssessmentConsole.Models;
+using ChannelEngineAssessmentConsole.Windows;
 using ChannelEngineAssessmentDomain.MerchantOrders.Factories;
 using ChannelEngineAssessmentInfrastructure.MerchantOrders.Repositories;
+using ChannelEngineAssessmentShared.Application.Handlers.Abstraction;
+using ChannelEngineAssessmentShared.Application.Handlers.Implementations;
 using ChannelEngineAssessmentShared.Configurations;
+using ChannelEngineAssessmentShared.Exceptions;
 using ChannelEngineAssessmentShared.IoC;
 using ChannelEngineAssessmentWeb.MappingProfiles.Products;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +23,43 @@ namespace ChannelEngineAssessmentConsole
     public class Program
     {
         public static void Main(string[] args)
+        {
+            var container = ConfigureContainer();
+
+            Application.Init();
+            var top = Application.Top;
+            var mainWindow = container.Resolve<MainWindow>();
+            mainWindow.X = 0;
+            mainWindow.Y = 0;
+            mainWindow.Width = Dim.Fill();
+            mainWindow.Height = Dim.Fill();
+
+            top.Add(mainWindow);
+            try
+            {
+                Application.Run();
+            }
+            catch (Exception ex)
+            {
+                if (ex is HttpClientUnhandledException ce)
+                {
+                    MessageBox.ErrorQuery("Error", $"Api error, HTTP Code: {ce.StatusCode}", "Ok");
+                    Main(args);
+                }
+
+                else if (ex is BusinessLogicException be)
+                {
+                    MessageBox.ErrorQuery("Error", be.Message, "Ok");
+                    Main(args);
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        public static IContainer ConfigureContainer()
         {
             var containerBuilder = new ContainerBuilder();
             IConfiguration Configuration = new ConfigurationBuilder()
@@ -33,59 +76,13 @@ namespace ChannelEngineAssessmentConsole
                     Configuration["AppConfiguration:ApiKeyNameUrlParameter"],
                     Configuration["AppConfiguration:ApiKey"],
                     endpoints: endpointsConfiguration)));
-            containerBuilder.RegisterModule(new ApplicationMappingsModule(typeof(ProductsService).Assembly, typeof(MerchantOrderRepository).Assembly, typeof(ProductsControllerMappingProfile).Assembly));
+            containerBuilder.RegisterModule(new ApplicationMappingsModule(typeof(ProductsService).Assembly, typeof(MerchantOrderRepository).Assembly, typeof(TopSoldProductTerminalModel).Assembly));
             containerBuilder.RegisterModule(new ApplicationHandlersModule<ProductsService>());
             containerBuilder.RegisterModule(new ApplicationRepositoriesModule<MerchantOrderRepository>());
             containerBuilder.RegisterModule(new ApplicationFactoriesModule<MerchantOrderDomainFactory>());
+            containerBuilder.RegisterType<MainWindow>().AsSelf().InstancePerLifetimeScope();
 
-            Application.Init();
-            var top = Application.Top;
-
-            // Creates the top-level window to show
-            var win = new Window("MyApp")
-            {
-                X = 0,
-                Y = 1, // Leave one row for the toplevel menu
-
-                // By using Dim.Fill(), it will automatically resize without manual intervention
-                Width = Dim.Fill(),
-                Height = Dim.Fill()
-            };
-
-            top.Add(win);
-            var login = new Label("Login: ") { X = 3, Y = 2 };
-            var password = new Label("Password: ")
-            {
-                X = Pos.Left(login),
-                Y = Pos.Top(login) + 1
-            };
-            var loginText = new TextField("")
-            {
-                X = Pos.Right(password),
-                Y = Pos.Top(login),
-                Width = 40
-            };
-            var passText = new TextField("")
-            {
-                Secret = true,
-                X = Pos.Left(loginText),
-                Y = Pos.Top(password),
-                Width = Dim.Width(loginText)
-            };
-
-            // Add some controls, 
-            win.Add(
-                // The ones with my favorite layout system, Computed
-                login, password, loginText, passText,
-
-                // The ones laid out like an australopithecus, with Absolute positions:
-                new CheckBox(3, 6, "Remember me"),
-                new RadioGroup(3, 8, new ustring[] { "_Personal", "_Company" }),
-                new Button(3, 14, "Ok"),
-                new Button(10, 14, "Cancel"),
-                new Label(3, 18, "Press F9 or ESC plus 9 to activate the menubar")
-            );
-			Application.Run();
-		}
+            return containerBuilder.Build();
+        }
     }
 }

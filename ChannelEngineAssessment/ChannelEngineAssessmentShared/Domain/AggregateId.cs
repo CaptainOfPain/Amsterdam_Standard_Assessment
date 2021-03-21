@@ -52,5 +52,10 @@ namespace ChannelEngineAssessmentShared.Domain
 
             Id = id;
         }
+
+        public static AggregateId Generate()
+        {
+            return new AggregateId(Guid.NewGuid().ToString());
+        }
     }
 }

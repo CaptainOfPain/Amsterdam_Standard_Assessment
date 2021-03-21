@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +12,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { SetProductStockModalComponent } from './products/set-product-stock-modal/set-product-stock-modal.component';
 import { SaveProductModalComponent } from './products/save-product-modal/save-product-modal.component';
+import { HttpErrorInterceptor } from './http-error-interceptor';
 
 @NgModule({
   declarations: [
@@ -36,9 +36,13 @@ import { SaveProductModalComponent } from './products/save-product-modal/save-pr
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'products/:merchantProductNo/details', component: ProductDetailsComponent },
-    ])
+    ]),
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpErrorInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

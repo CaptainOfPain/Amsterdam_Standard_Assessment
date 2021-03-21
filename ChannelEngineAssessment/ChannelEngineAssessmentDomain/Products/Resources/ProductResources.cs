@@ -8,5 +8,6 @@
         public const string TooManyImageUrlsMessage = nameof(TooManyImageUrlsMessage);
         public const string WrongImageUrlMessage = nameof(WrongImageUrlMessage);
         public const string ExternalImageUrlNotFoundMessage = nameof(ExternalImageUrlNotFoundMessage);
+        public const string NameCannotBeEmptyMessage = nameof(NameCannotBeEmptyMessage);
     }
 }

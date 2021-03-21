@@ -52,7 +52,7 @@ namespace ChannelEngineAssessmentDomain.Products
         public void Update(ProductDataStructure dataStructure)
         {
             AssignFromDataStructure(dataStructure);
-            UpdatedAt = DateTime.UtcNow;
+            UpdateUpdatedAt();
         }
 
         public void SetStock(int stock)
@@ -63,6 +63,7 @@ namespace ChannelEngineAssessmentDomain.Products
             }
 
             Stock = stock;
+            UpdateUpdatedAt();
         }
 
         public int AddExtraImageUrl(string url)
@@ -102,7 +103,7 @@ namespace ChannelEngineAssessmentDomain.Products
         {
             IsActive = dataStructure.IsActive;
             ExtraData = dataStructure.ExtraData;
-            Name = dataStructure.Name;
+            SetName(dataStructure.Name);
             Description = dataStructure.Description;
             Brand = dataStructure.Brand;
             Size = dataStructure.Size;
@@ -118,6 +119,16 @@ namespace ChannelEngineAssessmentDomain.Products
             Url = dataStructure.Url;
             ImageUrl = dataStructure.ImageUrl;
             CategoryTrail = dataStructure.CategoryTrail;
+        }
+
+        private void SetName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new BusinessLogicException(ProductResources.NameCannotBeEmptyMessage);
+            }
+
+            Name = name;
         }
 
         private int GetNextExtraImageUrlNo

@@ -19,5 +19,10 @@ namespace ChannelEngineAssessmentShared.Domain
         {
 
         }
+
+        protected void UpdateUpdatedAt()
+        {
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }
